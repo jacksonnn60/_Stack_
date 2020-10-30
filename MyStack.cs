@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 namespace StackOnObject.Properties
 {
-    public class MyStack
+    public class MyStack<T>
     {
-        private object[] _items;    //creat a new array
+        private T[] _items;    //creat a new array
 
 
         public int Count { get; private set; }   // counter
@@ -20,20 +20,20 @@ namespace StackOnObject.Properties
         public MyStack()//default constructor!
         {
             const int defaultCapacity = 4;   //length without changing it == 4!
-            _items = new object[defaultCapacity];
+            _items = new T[defaultCapacity];
 
         }
 
         public MyStack(int capasity)   //constructor to give array.Length!
         {
-            _items = new object[capasity];   //preventing our array to his changed Length|
+            _items = new T[capasity];   //preventing our array to his changed Length|
         }
 
-        public void Push(object item)   //ordinary pushing OBJECTS!!!
+        public void Push(T item)   //ordinary pushing OBJECTS!!!
         {
             if (_items.Length == Count)
             {
-                object[] largerArray = new object[Count * 2];
+                T[] largerArray = new T[Count * 2];
 
                 Array.Copy(_items, largerArray, Count);
 
@@ -50,10 +50,10 @@ namespace StackOnObject.Properties
                 throw new InvalidOperationException();
             }
 
-            _items[--Count] = null;
+            _items[--Count] = default;
         }
 
-        public object Peek()
+        public T Peek()
         {
             if (Count == 0)    //exception
             {
